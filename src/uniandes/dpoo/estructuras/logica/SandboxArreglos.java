@@ -46,11 +46,12 @@ public class SandboxArreglos
      */
     public int[] getCopiaEnteros( )
     {
-    	/*
-    	 * CAMBIOS CROW :)
-    	 * PREGUNTA OPTIMIZACÓN Y SI PODEMOS IMPORTAR UTIL.ARRAY
-    	 */
-    	int[] copiaEnteros  = Arrays.copyOf(this.arregloEnteros, this.arregloEnteros.length);
+    	int[] copiaEnteros  = new int[this.arregloEnteros.length];
+    	
+    	for (int i=0; i<this.arregloEnteros.length; i++)
+    	{
+    		copiaEnteros[i] = this.arregloEnteros[i];
+    	}
 		
         return copiaEnteros;
     }
@@ -61,10 +62,12 @@ public class SandboxArreglos
      */
     public String[] getCopiaCadenas( )
     {
-    	/*
-    	 * CAMBIOS CROW :)
-    	 */
-    	String[] copiaCadenas  = Arrays.copyOf(this.arregloCadenas, this.arregloCadenas.length);
+    	String [] copiaCadenas  = new String [this.arregloCadenas.length];
+    	
+    	for (int i=0; i<this.arregloCadenas.length; i++)
+    	{
+    		copiaCadenas[i] = this.arregloCadenas[i];
+    	}
 		
         return copiaCadenas;
     }
@@ -100,11 +103,13 @@ public class SandboxArreglos
      */
     public void agregarEntero( int entero )
     {
-    	/*
-    	 * CAMBIOS CROW :)
-    	 */
-
-    	int[] nuevoEnteros  = Arrays.copyOf(this.arregloEnteros, this.arregloEnteros.length+1);
+    	int[] nuevoEnteros  = new int[this.arregloEnteros.length+1];
+    	
+    	for (int i=0; i<this.arregloEnteros.length; i++)
+    	{
+    		nuevoEnteros[i] = this.arregloEnteros[i];
+    	}
+		
     	nuevoEnteros[this.arregloEnteros.length]=entero;
     	this.arregloEnteros=nuevoEnteros;
 
@@ -117,12 +122,15 @@ public class SandboxArreglos
      */
     public void agregarCadena( String cadena )
     {
-    	/*
-    	 * CAMBIOS CROW :)
-    	 */
-    	String[] nuevoCadenas  = Arrays.copyOf(this.arregloCadenas, this.arregloCadenas.length+1);
-    	nuevoCadenas[this.arregloCadenas.length]=cadena;
-    	this.arregloCadenas=nuevoCadenas;
+    	String[] nuevasCadenas  = new String[this.arregloCadenas.length+1];
+    	
+    	for (int i=0; i<this.arregloCadenas.length; i++)
+    	{
+    		nuevasCadenas[i] = this.arregloCadenas[i];
+    	}
+		
+    	nuevasCadenas[this.arregloCadenas.length]=cadena;
+    	this.arregloCadenas=nuevasCadenas;
     }
 
     /**
@@ -136,15 +144,25 @@ public class SandboxArreglos
     	 */
     	
     	int size=0;
-    	int [] nuevosEnteros = {};
+    	int [] nuevosEnteros;
+    	int deficit =0;
+    	
+    	for (int i=0; i<this.arregloEnteros.length; i++)
+    	{
+    		if ((this.arregloEnteros[i]==valor))
+    		{
+    			size+=1;	
+    		}
+    	}
+    	
+    	nuevosEnteros= new int [this.arregloEnteros.length-size];
     	
     	for (int i=0; i<this.arregloEnteros.length; i++)
     	{
     		if (!(this.arregloEnteros[i]==valor))
     		{
-    			size+=1;
-    			nuevosEnteros = Arrays.copyOf(nuevosEnteros, size);
-    			nuevosEnteros[nuevosEnteros.length-1]=arregloEnteros[i];
+    			nuevosEnteros[i-deficit]=arregloEnteros[i];
+    			deficit+=1;
     		}
     	}
     	this.arregloEnteros=nuevosEnteros;

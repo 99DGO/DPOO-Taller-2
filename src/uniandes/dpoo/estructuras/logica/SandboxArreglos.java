@@ -179,15 +179,25 @@ public class SandboxArreglos
     	 */
     	
     	int size=0;
-    	String [] nuevasCadenas = {};
+    	String [] nuevasCadenas;
+    	int deficit =0;
+    	
+    	for (int i=0; i<this.arregloCadenas.length; i++)
+    	{
+    		if ((this.arregloCadenas[i]==cadena))
+    		{
+    			size+=1;	
+    		}
+    	}
+    	
+    	nuevasCadenas= new String [this.arregloCadenas.length-size];
     	
     	for (int i=0; i<this.arregloCadenas.length; i++)
     	{
     		if (!(this.arregloCadenas[i]==cadena))
     		{
-    			size+=1;
-    			nuevasCadenas = Arrays.copyOf(nuevasCadenas, size);
-    			nuevasCadenas[nuevasCadenas.length-1]=arregloCadenas[i];
+    			nuevasCadenas[i-deficit]=arregloCadenas[i];
+    			deficit+=1;
     		}
     	}
     	this.arregloCadenas=nuevasCadenas;
@@ -409,17 +419,28 @@ public class SandboxArreglos
      */
     public int[] buscarEntero( int valor )
     {
-    	//CROW
-    	
-    	int [] posiciones= {};
+    	int [] posiciones;
+    	int size =0;
+    	int sizePosiciones =0;
     	
     	for (int i=0; i<this.arregloEnteros.length; i++)
     	{
     		if (this.arregloEnteros[i]==valor)
     		{
-    			posiciones=Arrays.copyOf(posiciones, posiciones.length+1);
-    			posiciones[posiciones.length-1]=i;
+    			size+=1;
     		}
+    	}
+    	
+    	posiciones = new int[size];
+    	
+    	for (int i=0; i<this.arregloEnteros.length; i++)
+    	{
+    		if (this.arregloEnteros[i]==valor)
+    		{
+    			posiciones[sizePosiciones]=i;
+    			sizePosiciones+=1;
+    		}
+    		
     	}
     	
         return posiciones;
@@ -440,7 +461,7 @@ public class SandboxArreglos
     	
     	if (this.arregloEnteros.length!=0)
     	{
-    		rango= Arrays.copyOf(rango, 2);
+    		rango= new int[2];
     	}
     	
     	for (int i=0; i<this.arregloEnteros.length; i++)
